@@ -15,9 +15,10 @@ class Wordlist:
         self.words = []
 
     def append_words(self, string):
-        for line in string:
+        for line in string.split('\n'):
             line = line.strip()
-            if line.startswith("#"):
+            if line.startswith("#")\
+            or line == "":
                 continue
             self.words += [Word(word.strip()) for word in line.split(",")]
 
@@ -30,10 +31,20 @@ class Wordlist:
         for word in self.words:
             if word.definition == "":
                 try:
-                    word.definition = the_dict[word]
+                    word.definition = the_dict[word.word]
                 except KeyError:
                     pass
                     
     def counts(self):
         return len(self.words)
         
+#test
+if __name__ == "__main__":
+    wl = Wordlist()
+    text = open("example.txt").read()
+    wl.append_words(text)
+    wl.import_definitions("oxfordjm-ec")
+    for word in wl.words:
+        print word.word,":"
+        print word.definition
+        print "="*15
