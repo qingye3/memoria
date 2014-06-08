@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from pystardict import Dictionary
 import random
+
 class Word:
     def __init__(self, word = "", definition = ""):
         self.word = word 
@@ -74,6 +75,7 @@ class Word_DB:
         new_wl.import_words(text) 
         self.wordlists.append(new_wl)
         file_in.close()
+
     def __repr__(self):
         ret_str = ""
         for i, wordlist in enumerate(self.wordlists):
@@ -81,6 +83,7 @@ class Word_DB:
             ret_str += repr(wordlist)
             ret_str += "*"*50 + "\n\n"
         return ret_str
+
     def __getitem__(self, n):
         return self.wordlists[n]
             
@@ -93,7 +96,6 @@ def merged_list(lists):
     for l in lists:
         ret_list.words += l.words
     return ret_list 
-
 
 if __name__ == "__main__":
     word_db = Word_DB()
