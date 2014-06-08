@@ -31,9 +31,11 @@ class MainMenu:
 
     def _import_cb(self):
         commands.import_db(self.session)
+        self.parent._draw()
 
     def _open_cb(self):
         commands.open_db(self.session)
+        self.parent._draw()
 
     def _save_cb(self):
         commands.save_db(self.session)

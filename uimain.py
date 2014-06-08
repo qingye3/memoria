@@ -34,8 +34,12 @@ class Main_Winodw:
 
         wordlists = uicomponents.ScrolledList(frame)
         wordlists.pack(fill = "both", expand = 1)
+        wordlists.listbox.config(selectmode = tk.EXTENDED)
+        wordlists.listbox.bind("<Double-Button-1>", self._select_wordlist_cb)
 
         frame.pack(fill = "y", side = 'left')
+
+        self.wl_list = wordlists.listbox
 
     def _create_words_frame(self):
         frame = tk.Frame(self.root)
@@ -65,6 +69,40 @@ class Main_Winodw:
         wordlist.pack(fill = "both", expand = 1)
 
         frame.pack(fill = "y", side = "right", expand = 1)
+
+        self.wordlist = wordlist.listbox
+        self.wordtext = wordtext.text
+
+    def _draw(self):
+        self._draw_wordlists_db()
+        self._draw_wordlist()
+        self._draw_word()
+
+    def _draw_wordlists_db(self):
+        word_db = self.session.word_db
+        if word_db == None:
+            return
+        self.wl_list.delete(0, tk.END)
+        for i in range(len(word_db)):
+            self.wl_list.insert(tk.END, "Wordlist %i" %(i+1))
+        self.wl_list.selection_set(0)
+        self.session.current_wordlist = word_db[0]
+        
+    def _draw_wordlist(self):
+        curlist = self.session.current_wordlist
+        self.wordlist.delete(0, tk.END)
+        for i in range(len(curlist)):
+            self.wordlist.insert(tk.END, curlist[i].word)
+
+    def _draw_word(self):
+        pass
+
+    def _select_wordlist_cb(self, event):
+        word_db = self.session.word_db
+        if self.wl_list.curselection():
+            items = map(int, self.wl_list.curselection())
+            self.session.current_wordlist = word_db[items[0]]
+            self._draw_wordlist()
 
     def _merge_cb(self):
         pass

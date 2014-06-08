@@ -46,6 +46,9 @@ class Wordlist:
     def __getitem__(self, n):
         return self.words[n]
 
+    def __len__(self):
+        return len(self.words)
+
     def __repr__(self):
         ret_str = ""
         for word in self.words:
@@ -86,6 +89,9 @@ class Word_DB:
 
     def __getitem__(self, n):
         return self.wordlists[n]
+
+    def __len__(self):
+        return len(self.wordlists)
             
     @staticmethod
     def _is_command(line):
