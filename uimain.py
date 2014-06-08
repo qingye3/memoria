@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import Tkinter as tk
 import uimainmenu
+import uicomponents
 class Main_Winodw:
     def __init__(self, root, session):
         self.root = root
@@ -31,7 +32,7 @@ class Main_Winodw:
         split_but.pack(side = "right", fill = "x")
         buttons.pack(fill = "x", side = 'top')
 
-        wordlists = tk.Listbox(frame)
+        wordlists = uicomponents.ScrolledList(frame)
         wordlists.pack(fill = "both", expand = 1)
 
         frame.pack(fill = "y", side = 'left')
@@ -56,14 +57,14 @@ class Main_Winodw:
         buttons.pack(side = "right", fill = "both")
         toolbar.pack(side = "top", expand = 1)
 
-        wordtext = tk.Text(frame, height = 12)
-        wordtext.pack(fill = "both", expand = 1)
+        wordtext = uicomponents.ScrolledText(frame)
+        wordtext.text.config(height = 12)
+        wordtext.pack(fill = "both")
 
-        wordlist = tk.Listbox(frame)
+        wordlist = uicomponents.ScrolledList(frame)
         wordlist.pack(fill = "both", expand = 1)
 
         frame.pack(fill = "y", side = "right", expand = 1)
-        pass
 
     def _merge_cb(self):
         pass

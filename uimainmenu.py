@@ -1,4 +1,5 @@
 import Tkinter as tk
+import commands
 class MainMenu:
     def __init__(self, parent):
         self.parent = parent
@@ -29,16 +30,16 @@ class MainMenu:
         self.menubar.add_cascade(label = "Help", menu = help_menu)
 
     def _import_cb(self):
-        command.import_db(self.session)
+        commands.import_db(self.session)
 
     def _open_cb(self):
-        pass
+        commands.open_db(self.session)
 
     def _save_cb(self):
-        pass
+        commands.save_db(self.session)
 
     def _save_as_cb(self):
-        pass
+        commands.save_as_db(self.session)
 
     def _merge_cb(self):
         pass
