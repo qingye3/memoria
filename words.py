@@ -102,6 +102,7 @@ if __name__ == "__main__":
     word_db.append_from_file("example2.txt")
     for wordlist in word_db.wordlists:
         wordlist.import_definitions("oxfordjm-ec")
+    
 
     print ">>>original_db"
     print word_db

@@ -10,6 +10,7 @@ class MainMenu:
         self.menubar = tk.Menu(self.root)
 
         file_menu = tk.Menu(self.menubar, tearoff = 0)
+        file_menu.add_command(label = "Import...", command = self._import_cb)
         file_menu.add_command(label = "Open... ", command = self._open_cb) 
         file_menu.add_command(label = "Save... ", command = self._save_cb)
         file_menu.add_command(label = "Save as...", command = self._save_as_cb)
@@ -26,6 +27,9 @@ class MainMenu:
         help_menu = tk.Menu(self.menubar, tearoff = 0)
         help_menu.add_command(label = "About...", command = self._about_cb)
         self.menubar.add_cascade(label = "Help", menu = help_menu)
+
+    def _import_cb(self):
+        command.import_db(self.session)
 
     def _open_cb(self):
         pass
