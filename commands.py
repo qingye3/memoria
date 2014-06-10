@@ -3,6 +3,7 @@ import words
 import os
 import tkFileDialog
 import cPickle
+import itertools
 
 def import_db(session):
     file_name = tkFileDialog.askopenfilename(multiple = False, initialdir = session.import_db_dir)
@@ -39,4 +40,45 @@ def open_db(session):
     session.word_db = cPickle.load(file_in)
     file_in.close()
 
+def import_definitions(session, wordlists):
+    file_name = tkFileDialog.askopenfilename(multiple = False, initialdir = session.dict_dir, filetypes = [("Dictionary file", ".dict")])
+    if file_name:
+        session.dict_dir = os.path.dirname(file_name)
+        dictionary = file_name[:-5]
+        for wordlist in wordlists:
+            wordlist.import_definitions(dictionary)
+
+def randomize(session, wordlists):
+    for wordlist in wordlists:
+        wordlist.randomize()
+
+def merge(session, merge_indice):
+    merge_indice = list(merge_indice)
+    word_db = session.word_db
+    selected_wordlists = [word_db[i] for i in merge_indice]
+    session.word_db.wordlists[merge_indice[0]] = words.merged_list(selected_wordlists)
+    for index in reversed(merge_indice[1:]):
+        del word_db.wordlists[index]
+
+def split(session, split_indices):
+    split_indices = list(split_indices)
+    word_db = session.word_db
+    first_index = split_indices[0]
+    selected_wordlists = [word_db[i] for i in split_indices]
+    merged = words.merged_list(selected_wordlists)
+    for index in reversed(split_indices):
+        del word_db.wordlists[index]
+    num_per_list = session.num_per_list
+    list_iter = _grouper(num_per_list, merged.words)
+    for i,l in enumerate(list_iter):
+        word_db.wordlists.insert(i+first_index,
+                                words.Wordlist([x for x in l if x != None]))
+
+def _grouper(n, iterable, fillvalue = None):
+    args = [iter(iterable)] * n
+    return itertools.izip_longest(fillvalue = fillvalue, *args)
     
+
+
+
+

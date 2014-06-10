@@ -1,4 +1,5 @@
 import Tkinter as tk
+import uisplit
 import commands
 class MainMenu:
     def __init__(self, parent):
@@ -44,19 +45,29 @@ class MainMenu:
         commands.save_as_db(self.session)
 
     def _merge_cb(self):
-        pass
+        merge_indice= self.parent.wl_list.curselection() 
+        commands.merge(self.session, merge_indice)
+        self.parent._draw()
 
     def _split_cb(self):
-        pass
+        split_window = uisplit.Split_Window(self.parent)
 
     def _remove_dup_cb(self):
         pass
 
     def _import_def_cb(self):
-        pass
+        selected_indices = self.parent.wl_list.curselection() 
+        word_db = self.session.word_db
+        selected_wordlists = [word_db[i] for i in selected_indices]
+        commands.import_definitions(self.session, selected_wordlists)
+        self.parent._draw_word()
 
     def _randomize_cb(self):
-        pass
+        selected_indices = self.parent.wl_list.curselection() 
+        word_db = self.session.word_db
+        selected_wordlists = [word_db[i] for i in selected_indices]
+        commands.randomize(self.session, selected_wordlists)
+        self.parent._draw_wordlist()
 
     def _about_cb(self):
         pass

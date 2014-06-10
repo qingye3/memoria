@@ -10,8 +10,8 @@ class Word:
         return "%s:\n%s"%(self.word, self.definition)
 
 class Wordlist:
-    def __init__(self):
-        self.words = []
+    def __init__(self, new_wordlist = []):
+        self.words = new_wordlist 
 
     def delete(self):
         del self.words
@@ -98,7 +98,7 @@ class Word_DB:
         return line.strip().startswith("@")
 
 def merged_list(lists):
-    ret_list = Wordlist()
+    ret_list = Wordlist([])
     for l in lists:
         ret_list.words += l.words
     return ret_list 
@@ -107,11 +107,8 @@ if __name__ == "__main__":
     word_db = Word_DB()
     word_db.append_from_file("example2.txt")
     for wordlist in word_db.wordlists:
-        wordlist.import_definitions("oxfordjm-ec")
-    
-
-    print ">>>original_db"
-    print word_db
+        wordlist.import_definitions("/home/lh2/Workspace/memoria/oxfordjm-ec")
+        #wordlist.import_definitions("oxfordjm-ec")
 
     new_list = merged_list(word_db.wordlists)
     new_list.randomize()
