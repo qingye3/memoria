@@ -110,7 +110,7 @@ class Main_Winodw:
         curword = self.session.current_word
         self.wordtext.delete(1.0, tk.END)
         if self.show_word.get():
-            self.wordtext.insert(tk.END, self.session.current_word.word)
+            self.wordtext.insert(tk.END, "%s\n"%self.session.current_word.word)
         if self.show_def.get():
             self.wordtext.insert(tk.END, self.session.current_word.definition)
 
