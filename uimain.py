@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#-*- coding: utf-8 -*-
 import Tkinter as tk
 import uisplit
 import uimainmenu
@@ -81,7 +81,7 @@ class Main_Winodw:
         self.wordlist = wordlist.listbox
         self.wordtext = wordtext.text
 
-        self.wordlist.bind("<Double-Button-1>", self._select_word_cb)
+        self.wordlist.bind("<ButtonRelease-1>", self._select_word_cb)
 
     def _draw(self):
         self._draw_wordlists_db()
@@ -155,18 +155,6 @@ class Main_Winodw:
                 self.wordlist.select_clear(items[0])
                 self.wordlist.selection_set(items[0] + 1)
             self._draw_word()
-
-    def _show_word_cb(self):
-        pass
-
-    def _hide_word_cb(self):
-        pass
-
-    def _show_def_cb(self):
-        pass
-
-    def _hide_def_cb(self):
-        pass
 
     def loop(self):
         self.root.mainloop()

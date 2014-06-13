@@ -1,5 +1,6 @@
 import Tkinter as tk
 import uisplit
+import uiedit
 import commands
 class MainMenu:
     def __init__(self, parent):
@@ -19,6 +20,7 @@ class MainMenu:
         self.menubar.add_cascade(label = "File", menu = file_menu)
 
         wordlist_menu = tk.Menu(self.menubar, tearoff = 0)
+        wordlist_menu.add_command(label = "Edit...", command = self._edit_cb)
         wordlist_menu.add_command(label = "Merge", command = self._merge_cb)
         wordlist_menu.add_command(label = "Split...", command = self._split_cb)
         wordlist_menu.add_command(label = "Remove duplicates", command = self._remove_dup_cb)
@@ -43,6 +45,9 @@ class MainMenu:
 
     def _save_as_cb(self):
         commands.save_as_db(self.session)
+
+    def _edit_cb(self):
+        edit_window = uiedit.Edit_Window(self.parent)
 
     def _merge_cb(self):
         merge_indice= self.parent.wl_list.curselection() 
