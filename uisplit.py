@@ -33,5 +33,7 @@ class Split_Window():
         selected_indices = self.parent.wl_list.curselection() 
         commands.split(self.session, selected_indices)
         self.parent._draw()
+        self.parent.wl_list.selection_set(selected_indices[0])
+        self.top.destroy()
         
     

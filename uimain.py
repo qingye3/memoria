@@ -55,7 +55,7 @@ class Main_Winodw:
         wordlists = uicomponents.ScrolledList(frame)
         wordlists.pack(fill = "both", expand = 1)
         wordlists.listbox.config(selectmode = tk.EXTENDED)
-        wordlists.listbox.bind("<Double-Button-1>", self._select_wordlist_cb)
+        wordlists.listbox.bind("<ButtonRelease-1>", self._select_wordlist_cb)
 
         frame.pack(fill = "y", side = 'left')
 
@@ -72,9 +72,9 @@ class Main_Winodw:
         self.show_def.set(True)
         checkboxes = tk.Frame(toolbar)
         show_word_box = tk.Checkbutton(checkboxes, text = "show word", variable = self.show_word, onvalue = True, offvalue = False, command = self._draw_word)
-        show_word_box.pack(side = "top")
+        show_word_box.grid(row = 0, column = 0, sticky = tk.W)
         show_def_box = tk.Checkbutton(checkboxes, text = "show definition", variable = self.show_def, onvalue = True, offvalue = False, command = self._draw_word)
-        show_def_box.pack(side = "bottom")
+        show_def_box.grid(row = 1, column = 0, sticky = tk.W)
         checkboxes.pack(side = "left")
 
         buttons = tk.Frame(toolbar)
@@ -82,8 +82,8 @@ class Main_Winodw:
         previous_but.pack(side = "left", fill = "y")
         next_but = tk.Button(buttons, text = "Next", width = 8, command = self._next_cb)
         next_but.pack(side = "right", fill = "y")
-        buttons.pack(side = "right", fill = "both")
-        toolbar.pack(side = "top", expand = 1)
+        buttons.pack(side = "right", fill = "y")
+        toolbar.pack(side = "top", expand = 1, fill = "x")
 
         wordtext = uicomponents.ScrolledText(frame)
         wordtext.text.config(height = 10)
@@ -91,6 +91,7 @@ class Main_Winodw:
         wordtext.pack(fill = "both")
 
         wordlist = uicomponents.ScrolledList(frame)
+        wordlist.listbox.config(height = 20)
         wordlist.pack(fill = "both", expand = 1)
 
         frame.pack(fill = "y", side = "right", expand = 1)
@@ -137,6 +138,7 @@ class Main_Winodw:
             items = map(int, self.wl_list.curselection())
             self.session.current_wordlist = word_db[items[0]]
             self._draw_wordlist()
+            self._select_word_cb(None)
 
     def _select_word_cb(self, event):
         curlist = self.session.current_wordlist

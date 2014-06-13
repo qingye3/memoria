@@ -23,6 +23,7 @@ class ScrolledList(tk.Frame):
         list = tk.Listbox(self, relief = tk.SUNKEN)
         sbar.config(command = list.yview)
         list.config(yscrollcommand = sbar.set)
+        list.config(exportselection = 0)
         sbar.pack(side = tk.RIGHT, fill = tk.Y)
         list.pack(side = tk.LEFT, expand = tk.YES, fill = tk.BOTH)
         

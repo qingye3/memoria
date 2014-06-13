@@ -40,14 +40,14 @@ class MainMenu:
         wordlist_menu.add_command(label = "Edit...", command = self._edit_cb)
         wordlist_menu.add_command(label = "Merge", command = self._merge_cb)
         wordlist_menu.add_command(label = "Split...", command = self._split_cb)
-        wordlist_menu.add_command(label = "Remove duplicates", command = self._remove_dup_cb)
+        #wordlist_menu.add_command(label = "Remove duplicates", command = self._remove_dup_cb)
         wordlist_menu.add_command(label = "Import Definition...", command = self._import_def_cb)
         wordlist_menu.add_command(label = "Randomize", command = self._randomize_cb)
         self.menubar.add_cascade(label = "Wordlist", menu = wordlist_menu)
 
-        help_menu = tk.Menu(self.menubar, tearoff = 0)
-        help_menu.add_command(label = "About...", command = self._about_cb)
-        self.menubar.add_cascade(label = "Help", menu = help_menu)
+        #help_menu = tk.Menu(self.menubar, tearoff = 0)
+        #help_menu.add_command(label = "About...", command = self._about_cb)
+        #self.menubar.add_cascade(label = "Help", menu = help_menu)
 
     def _import_cb(self):
         commands.import_db(self.session)
