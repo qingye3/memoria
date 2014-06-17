@@ -29,6 +29,7 @@ class Session():
         self.save_as_file = None
         self.open_db_dir = None
         self.dict_dir = None
+        self.export_dir = None
 
         self.num_per_list = 5
         

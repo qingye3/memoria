@@ -24,7 +24,15 @@ class Word:
         self.word = word 
         self.definition = definition 
     def __repr__(self):
-        return "%s:\n%s"%(self.word, self.definition)
+        if isinstance(self.word, unicode):
+            word = self.word.encode("utf-8")
+        else:
+            word = self.word
+        if isinstance(self.definition, unicode):
+            definition = self.definition.encode("utf-8")
+        else:
+            definition = self.definition
+        return "%s:\n%s"%(word, definition)
 
 class Wordlist:
     def __init__(self, new_wordlist = []):
@@ -126,15 +134,20 @@ if __name__ == "__main__":
     for wordlist in word_db.wordlists:
         wordlist.import_definitions("/home/lh2/Workspace/memoria/oxfordjm-ec")
         #wordlist.import_definitions("oxfordjm-ec")
+    import cPickle
+    cPickle.dump(word_db, open("test.mem", "w"))
+    a = cPickle.load(open("test.mem"))
+    print a
 
-    new_list = merged_list(word_db.wordlists)
-    new_list.randomize()
-    new_db = Word_DB(new_list)
 
-    word_db[0][0].definition = "changed"
+    #new_list = merged_list(word_db.wordlists)
+    #new_list.randomize()
+    #new_db = Word_DB(new_list)
 
-    print ">>>merged and randomized"
-    print new_db
+    #word_db[0][0].definition = "changed"
 
-    print ">>>show original one is unmodified"
-    print word_db
+    #print ">>>merged and randomized"
+    #print new_db
+
+    #print ">>>show original one is unmodified"
+    #print word_db

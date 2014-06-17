@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 This is part of memoria
 Copyright (C) 2014 Qing Ye

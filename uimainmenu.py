@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 This is part of memoria
 Copyright (C) 2014 Qing Ye
@@ -34,6 +35,7 @@ class MainMenu:
         file_menu.add_command(label = "Open... ", command = self._open_cb) 
         file_menu.add_command(label = "Save... ", command = self._save_cb)
         file_menu.add_command(label = "Save as...", command = self._save_as_cb)
+        file_menu.add_command(label = "Export as plain text...", command = self._export_plain_cb)
         self.menubar.add_cascade(label = "File", menu = file_menu)
 
         wordlist_menu = tk.Menu(self.menubar, tearoff = 0)
@@ -59,6 +61,9 @@ class MainMenu:
 
     def _save_cb(self):
         commands.save_db(self.session)
+
+    def _export_plain_cb(self):
+        commands.export_as_plain(self.session)
 
     def _save_as_cb(self):
         commands.save_as_db(self.session)

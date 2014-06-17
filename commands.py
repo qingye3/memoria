@@ -31,7 +31,7 @@ def import_db(session):
     session.word_db.append_from_file(file_name)
     
 def save_as_db(session):
-    file_name = tkFileDialog.asksaveasfilename(initialdir = session.import_db_dir, defaultextension = ".mem", filetypes = [("memoria file", ".mem")])
+    file_name = tkFileDialog.asksaveasfilename(initialdir = session.save_db_dir, defaultextension = ".mem", filetypes = [("memoria file", ".mem")])
     if file_name == u"" or file_name == []:
         return
     session.save_db_dir = os.path.dirname(file_name)
@@ -46,6 +46,15 @@ def save_db(session):
     else:
         file_o = open(session.save_as_file, "w")
         cPickle.dump(obj = session.word_db, file = file_o, protocol = 2)
+        file_o.close()
+
+def export_as_plain(session):
+    word_db = session.word_db
+    file_name = tkFileDialog.asksaveasfilename(initialdir = session.export_dir, defaultextension = ".txt", filetypes = [("Plain text", ".txt")])
+    if file_name:
+        session.export_dir = os.path.dirname(file_name)
+        file_o = open(file_name, mode = "w")
+        file_o.write(repr(word_db))
         file_o.close()
 
 def open_db(session):
@@ -94,8 +103,3 @@ def split(session, split_indices):
 def _grouper(n, iterable, fillvalue = None):
     args = [iter(iterable)] * n
     return itertools.izip_longest(fillvalue = fillvalue, *args)
-    
-
-
-
-
