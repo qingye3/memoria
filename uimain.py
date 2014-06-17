@@ -1,6 +1,6 @@
 #-*- coding: utf-8 -*-
 """
-This is part of memoria
+This file is part of memoria
 Copyright (C) 2014 Qing Ye
 
 This program is free software: you can redistribute it and/or modify
