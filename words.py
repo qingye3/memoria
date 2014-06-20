@@ -21,18 +21,23 @@ import random
 
 class Word:
     def __init__(self, word = "", definition = ""):
+        if not word:
+            word = ""
+        if not definition:
+            definition = ""
         self.word = word 
         self.definition = definition 
-    def __repr__(self):
+
+    def encode_utf8(self):
         if isinstance(self.word, unicode):
-            word = self.word.encode("utf-8")
-        else:
-            word = self.word
+            self.word = self.word.encode("utf-8")
         if isinstance(self.definition, unicode):
-            definition = self.definition.encode("utf-8")
-        else:
-            definition = self.definition
-        return "%s:\n%s"%(word, definition)
+            self.definition = self.definition.encode("utf-8")
+
+    def __repr__(self):
+        self.encode_utf8()
+        return "%s:\n%s"%(self.word, self.definition)
+
 
 class Wordlist:
     def __init__(self, new_wordlist = []):
@@ -80,6 +85,12 @@ class Wordlist:
             ret_str += repr(word)
             ret_str += "\n"+"-"*15+"\n"
         return ret_str
+    def __iter__(self):
+        return iter(self.words)
+
+    def encode_utf8(self):
+        for word in self.words:
+            word.encode_utf8()
 
 class Word_DB:
     def __init__(self, lists = []):
@@ -117,6 +128,13 @@ class Word_DB:
 
     def __len__(self):
         return len(self.wordlists)
+    
+    def __iter__(self):
+        return iter(self.wordlists)
+
+    def encode_utf8(self):
+        for wordlist in self.wordlists:
+            wordlist.encode_utf8()
             
     @staticmethod
     def _is_command(line):

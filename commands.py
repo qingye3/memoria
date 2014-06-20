@@ -19,8 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import words
 import os
 import tkFileDialog
-import cPickle
 import itertools
+import formats
 
 def import_db(session):
     file_name = tkFileDialog.askopenfilename(multiple = False, initialdir = session.import_db_dir)
@@ -31,22 +31,18 @@ def import_db(session):
     session.word_db.append_from_file(file_name)
     
 def save_as_db(session):
-    file_name = tkFileDialog.asksaveasfilename(initialdir = session.save_db_dir, defaultextension = ".mem", filetypes = [("memoria file", ".mem")])
+    file_name = tkFileDialog.asksaveasfilename(initialdir = session.save_db_dir, defaultextension = ".xml", filetypes = [("xml memoria database", ".xml")])
     if file_name == u"" or file_name == []:
         return
     session.save_db_dir = os.path.dirname(file_name)
     session.save_as_file = file_name
-    file_o = open(file_name, "w")
-    cPickle.dump(obj = session.word_db, file = file_o, protocol = 2)
-    file_o.close()
+    formats.save_db(session.word_db, file_name)
 
 def save_db(session):
     if session.save_as_file == None:
         save_as_db(session)
     else:
-        file_o = open(session.save_as_file, "w")
-        cPickle.dump(obj = session.word_db, file = file_o, protocol = 2)
-        file_o.close()
+        formats.save_db(session.word_db, file_name)
 
 def export_as_plain(session):
     word_db = session.word_db
@@ -58,13 +54,12 @@ def export_as_plain(session):
         file_o.close()
 
 def open_db(session):
-    file_name = tkFileDialog.askopenfilename(multiple = False, initialdir = session.open_db_dir, filetypes = [("memoria file",".mem")])
+    file_name = tkFileDialog.askopenfilename(multiple = False, initialdir = session.open_db_dir, filetypes = [("xml memoria database",".xml")])
     if file_name == u"" or file_name == []:
         return
     session.open_db_dir = os.path.dirname(file_name)
-    file_in = open(file_name, "r")
-    session.word_db = cPickle.load(file_in)
-    file_in.close()
+    session.word_db = formats.open_db(file_name)
+    session.word_db.encode_utf8()
 
 def import_definitions(session, wordlists):
     file_name = tkFileDialog.askopenfilename(multiple = False, initialdir = session.dict_dir, filetypes = [("Dictionary file", ".dict")])
