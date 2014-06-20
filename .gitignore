@@ -1,0 +1,7 @@
+*.pyc
+oxfordjm-ec.*
+*.swp
+example.txt
+example2.txt
+*.mem
+*.xml
