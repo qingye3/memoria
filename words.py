@@ -61,7 +61,7 @@ class Wordlist:
     def import_definitions(self, dictionary):
         the_dict = Dictionary(dictionary) 
         for word in self.words:
-            if word.definition == "":
+            if not word.definition.strip():
                 try:
                     word.definition = the_dict[word.word]
                 except KeyError:

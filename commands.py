@@ -85,10 +85,10 @@ def split(session, split_indices):
     split_indices = list(split_indices)
     word_db = session.word_db
     first_index = split_indices[0]
-    selected_wordlists = [word_db[i] for i in split_indices]
+    selected_wordlists = [word_db[int(i)] for i in split_indices]
     merged = words.merged_list(selected_wordlists)
     for index in reversed(split_indices):
-        del word_db.wordlists[index]
+        del word_db.wordlists[int(index)]
     num_per_list = session.num_per_list
     list_iter = _grouper(num_per_list, merged.words)
     for i,l in enumerate(list_iter):

@@ -49,5 +49,6 @@ class Edit_Window():
         word = self.session.current_word
         word.word = self.word_entry.get()
         word.definition = self.definition_text.get(1.0, tk.END)
+        word.encode_utf8()
         self.parent._draw_word()
         self.top.destroy()

@@ -56,6 +56,8 @@ class Main_Winodw:
         wordlists.pack(fill = "both", expand = 1)
         wordlists.listbox.config(selectmode = tk.EXTENDED)
         wordlists.listbox.bind("<ButtonRelease-1>", self._select_wordlist_cb)
+        wordlists.listbox.bind("<KeyRelease-Up>", self._select_wordlist_cb)
+        wordlists.listbox.bind("<KeyRelease-Down>", self._select_wordlist_cb)
 
         frame.pack(fill = "y", side = 'left')
 
@@ -100,6 +102,8 @@ class Main_Winodw:
         self.wordtext = wordtext.text
 
         self.wordlist.bind("<ButtonRelease-1>", self._select_word_cb)
+        self.wordlist.bind("<KeyRelease-Up>", self._select_word_cb)
+        self.wordlist.bind("<KeyRelease-Down>", self._select_word_cb)
 
     def _draw(self):
         self._draw_wordlists_db()
@@ -164,6 +168,7 @@ class Main_Winodw:
                 self.wordlist.select_clear(items[0])
                 self.wordlist.selection_set(items[0] - 1)
             self._draw_word()
+            self.wordlist.see(items[0] + 1)
 
     def _next_cb(self):
         curlist = self.session.current_wordlist
@@ -174,6 +179,7 @@ class Main_Winodw:
                 self.wordlist.select_clear(items[0])
                 self.wordlist.selection_set(items[0] + 1)
             self._draw_word()
+            self.wordlist.see(items[0] + 1)
 
     def loop(self):
         self.root.mainloop()
