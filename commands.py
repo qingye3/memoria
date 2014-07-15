@@ -27,7 +27,8 @@ def import_db(session):
     if file_name == u"" or file_name == []:
         return
     session.import_db_dir = os.path.dirname(file_name)
-    session.word_db = words.Word_DB()
+    if session.word_db == None:
+        session.word_db = words.Word_DB()
     session.word_db.append_from_file(file_name)
     
 def save_as_db(session):
