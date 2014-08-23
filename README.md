@@ -1,43 +1,21 @@
 memoria
 =======
-嘛！为毛要写README嘛。。。吾等物理系小朋友写程序可是没有节操的。。。
-嘛。。。写就写嘛。。。
-
-Authors/作者
+Authors
+-------
+Qing Ye <qingye@qingye.org>
+    
+Installation
 ------------
-Qing Ye <qingye3device@gmail.com>
 
-Installation/安装
------------------
+1. Install python: the python version I used was python 2.7
 
-0. 安装python
+2. Install pystardict: You can find pystardict from https://github.com/lig/pystardict.git. If you do not wish to install pystardict as a python library you can copy pystardict/src/pystardict.py to the memoria directory.
 
-    嘛。。。就不告诉你怎么装python 2.7
+Execuation
+----------
 
-1. 安装pystardict
+1. Importing word library from text file: You can import a GRE level vocabulary by clicking File->Import… and choose gre.txt. A customized library can be built by writing a text file similar to gre.txt.
 
-    嘛。。。在这里<https://github.com/lig/pystardict.git>
-    嘛。。。不想安装pystardict的话其实你把pystardict/src/pystardict.py拷贝的memoria的目录下就行了
+2. Importing definition of words. You can easily find stardict libraries online. Due to copyright reasons, I am not going to provide such library in the distribution. To import definitions, highlight all wordlists and then Wordlist->Import Definitions
 
-Execution/执行
---------------
-嘛。。。明显是python memoria.py嘛
-
-0. 导入文本单词库
-
-    嘛。。。打开以后File->Import...选择gre.txt嘛。。。或者你仿照gre.txt自己写个嘛。。。
-    嘛。。。至于为什么吾要把红宝书放在github上呢？因为吾没有节操嘛！
-
-1. 打开/保存memoria单词库。。。
-
-    嘛。。。就不告诉你Open和Save是干什么用的！
-
-2. 导入释义。。。
-
-    嘛。。。先下载一个stardict(星际译王)的词典。。。嘛。。。吾等推荐谷歌(嘛。。。这个网站好像暂时不存在)或者必不应搜索 stardict 牛津简明英汉词典
-
-    嘛。。。然后选择全部wordlists，然后就可以Wordlist->Import Definitions了嘛
-
-3. 乱序
-
-    嘛。。。先选择wordlists然后就可以wordlist->randomize了！
+3. Randomize wordlists. Select wordlists in which you want to randomize the order of the words. Then wordlist->randomize.
